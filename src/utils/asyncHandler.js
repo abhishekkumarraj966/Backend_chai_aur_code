@@ -1,28 +1,27 @@
-// Utility function to handle async route handlers and errors
 const asyncHandler = (requestHandler) => {
-  // Return a function that wraps the async route handler
-  return (req, res, next) => {
-    // Use Promise.resolve to catch any rejected promises from the handler
-    Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err));
-  };
-};
+    return (req, res, next) => {
+        Promise.resolve(requestHandler(req, res, next)).catch((err) => next(err))
+    }
+}
 
-/*
-Alternative Implementation:
-The following version uses async/await syntax directly:
 
-const asyncHandler = (fn) => async (req, res, next) => {
-  try {
-    await fn(req, res, next); // Execute the async route handler
-  } catch (error) {
-    // Catch errors and pass them to the error handler middleware
-    res.status(error.code || 500).json({
-      success: false,
-      message: error.message,
-    });
-  }
-};
-*/
+export { asyncHandler }
 
-// Export the asyncHandler function for reuse
-export { asyncHandler };
+
+
+
+// const asyncHandler = () => {}
+// const asyncHandler = (func) => () => {}
+// const asyncHandler = (func) => async () => {}
+
+
+// const asyncHandler = (fn) => async (req, res, next) => {
+//     try {
+//         await fn(req, res, next)
+//     } catch (error) {
+//         res.status(err.code || 500).json({
+//             success: false,
+//             message: err.message
+//         })
+//     }
+// }

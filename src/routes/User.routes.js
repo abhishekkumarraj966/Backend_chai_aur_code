@@ -1,8 +1,19 @@
-import { Router } from "express";
-import { registerUser } from "../controllers/User.controller";
+import { Router } from 'express';
+import { registerUser, loginUser } from '../controllers/User.controller.js';
 
-const router= Router();
+const router = Router();
 
-router.route("/register").post(registerUser)
+// Route for user registration
+router.post('/register', registerUser);
 
-export default router
+// Route for user login
+router.post('/login', loginUser);
+
+
+
+
+router.get('/af', (req, res) => {
+  res.status(200).json({ message: 'Welcome to the Users API' });
+});
+
+export default router;
